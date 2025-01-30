@@ -14,7 +14,7 @@ metadata:
 data:
   service.github: |
     webhook:
-      url: https://192.168.1.101/api/webhook
+      url: https://7bcf-213-164-193-102.ngrok-free.app/api/webhook
       headers:
         - name: Content-Type
           value: application/json 
