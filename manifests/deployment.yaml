@@ -1,21 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: notes-app-deployment
+  name: notes-app-pr-{{number}}
   labels:
     app: notes-app
+    pr: '{{number}}'
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: notes-app
+      pr: '{{number}}'
   template:
     metadata:
       labels:
         app: notes-app
+        pr: '{{number}}'
     spec:
       containers:
-      - name: notes-app-deployment
+      - name: notes-app
         image: pavansa/notes-app
         resources:
           requests:

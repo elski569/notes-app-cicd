@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pr-environment-generator
+  namespace: argocd
+spec:
+  generators:
+    - pullRequest:
+        github:
+          owner: elski569
+          repo: notes-app-cicd
+          labels:
+            - dev
+          tokenRef:
+            secretName: github-token
+            key: token
+  template:
+    metadata:
+      name: 'pr-{{number}}-notes-app'
+      labels:
+        environment: development
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/elski569/notes-app-cicd.git
+        targetRevision: '{{head_sha}}'
+        path: manifests
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'pr-{{number}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true 
