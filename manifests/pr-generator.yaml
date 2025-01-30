@@ -16,18 +16,18 @@ spec:
             key: token
   template:
     metadata:
-      name: 'pr-{{`{{number}}`}}-notes-app'
+      name: 'pr-$number-notes-app'
       labels:
         environment: development
     spec:
       project: default
       source:
         repoURL: https://github.com/elski569/notes-app-cicd.git
-        targetRevision: '{{`{{head_sha}}`}}'
+        targetRevision: '$head_sha'
         path: manifests
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'pr-{{`{{number}}`}}'
+        namespace: 'pr-$number'
       syncPolicy:
         automated:
           prune: true
