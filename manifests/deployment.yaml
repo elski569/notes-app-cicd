@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: notes-app-pr-{{number}}
+  name: notes-app-pr-{{`{{number}}`}}
   labels:
     app: notes-app
-    pr: '{{number}}'
+    pr: '{{`{{number}}`}}'
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: notes-app
-      pr: '{{number}}'
+      pr: '{{`{{number}}`}}'
   template:
     metadata:
       labels:
         app: notes-app
-        pr: '{{number}}'
+        pr: '{{`{{number}}`}}'
     spec:
       containers:
       - name: notes-app
